@@ -8,26 +8,23 @@ use App\Product;
 use App\ProductImage;
 use Image;
 
-class AdminPagesController extends Controller
+class AdminProductController extends Controller
 {
     public function index()
-    {
-        return view('admin.pages.index');
-    }
-
-    public function product_create()
-    {
-        return view('admin.pages.product.create');
-    }
-
-  public function manage_product()
 
     {
         $products = Product::orderBy('id', 'desc')->get();
         return view('admin.pages.product.index',compact('products'));
     }
 
-  public function product_edit($id)
+    public function create()
+    {
+        return view('admin.pages.product.create');
+    }
+
+ 
+
+  public function edit($id)
 
     {
         $product = Product::find($id);
@@ -35,7 +32,7 @@ class AdminPagesController extends Controller
     }
 
 
-    public function product_store(Request $request)
+    public function store(Request $request)
     {
 
         $request->validate([
