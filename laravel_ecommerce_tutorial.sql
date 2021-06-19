@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 23, 2018 at 04:51 PM
+-- Generation Time: Jul 20, 2018 at 05:11 PM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -64,6 +64,16 @@ CREATE TABLE `categories` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`, `description`, `image`, `parent_id`, `created_at`, `updated_at`) VALUES
+(1, 'Test', 'Test category', NULL, NULL, '2018-07-20 14:28:45', '2018-07-20 14:28:45'),
+(2, 'Programming', 'Programming', NULL, 1, '2018-07-20 14:44:26', '2018-07-20 14:44:26'),
+(3, 'Programming 2', NULL, NULL, 1, '2018-07-20 09:03:40', '2018-07-20 09:03:40'),
+(4, 'Category with Image', NULL, '1532099266.jpg', 1, '2018-07-20 09:07:47', '2018-07-20 09:07:47');
 
 -- --------------------------------------------------------
 
@@ -130,9 +140,7 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`id`, `category_id`, `brand_id`, `title`, `description`, `slug`, `quantity`, `price`, `status`, `offer_price`, `admin_id`, `created_at`, `updated_at`) VALUES
 (1, 1, 1, 'Samsung Galaxy', 'Samsung GalaxySamsung GalaxySamsung Galaxy\r\n\r\nSamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung Galaxy\r\n\r\nSamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung Galaxy', 'Samsung-Galaxy', 1, 10000, 1, NULL, 1, '2018-02-21 18:00:00', '2018-02-21 18:00:00'),
-(2, 1, 1, 'Samsung Galaxy 2', 'Samsung GalaxySamsung GalaxySamsung Galaxy\r\n\r\nSamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung Galaxy\r\n\r\nSamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung Galaxy', 'Samsung-Galaxy-2', 1, 10000, 1, NULL, 1, '2018-02-21 18:00:00', '2018-02-21 18:00:00'),
-(3, 1, 1, 'New Product', 'New ProductNew ProductNew ProductNew ProductNew Product\r\nNew ProductNew ProductNew ProductNew ProductNew ProductNew ProductNew ProductNew Product\r\nNew ProductNew ProductNew ProductNew ProductNew ProductNew ProductNew ProductNew ProductNew ProductNew Product', 'new-product', 10, 1000, 0, NULL, 1, '2018-02-23 09:04:37', '2018-02-23 09:04:37'),
-(4, 1, 1, 'Samsung Galaxy Note', 'Samsung Galaxy NoteSamsung Galaxy NoteSamsung Galaxy NoteSamsung Galaxy NoteSamsung Galaxy Note\r\n\r\nSamsung Galaxy NoteSamsung Galaxy NoteSamsung Galaxy NoteSamsung Galaxy NoteSamsung Galaxy NoteSamsung Galaxy NoteSamsung Galaxy Note', 'samsung-galaxy-note', 2, 100000, 0, NULL, 1, '2018-02-23 09:05:04', '2018-02-23 09:05:04');
+(2, 1, 1, 'Samsung Galaxy 2', 'Samsung GalaxySamsung GalaxySamsung Galaxy\r\n\r\nSamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung Galaxy\r\n\r\nSamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung Galaxy', 'Samsung-Galaxy-2', 1, 10000, 1, NULL, 1, '2018-02-21 18:00:00', '2018-02-21 18:00:00');
 
 -- --------------------------------------------------------
 
@@ -155,7 +163,10 @@ CREATE TABLE `product_images` (
 INSERT INTO `product_images` (`id`, `product_id`, `image`, `created_at`, `updated_at`) VALUES
 (1, 1, '1.png', NULL, NULL),
 (2, 2, '2.png', NULL, NULL),
-(3, 1, '3.png', NULL, NULL);
+(3, 1, '3.png', NULL, NULL),
+(4, 5, '1519483410.png', '2018-02-24 08:43:31', '2018-02-24 08:43:31'),
+(5, 6, '1519483895.png', '2018-02-24 08:51:35', '2018-02-24 08:51:35'),
+(6, 6, '1519483895.png', '2018-02-24 08:51:35', '2018-02-24 08:51:35');
 
 -- --------------------------------------------------------
 
@@ -244,7 +255,7 @@ ALTER TABLE `brands`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `migrations`
 --
@@ -254,12 +265,12 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `product_images`
 --
 ALTER TABLE `product_images`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `users`
 --
