@@ -39,7 +39,7 @@ class CategoriesController extends Controller
     $category->description = $request->description;
     $category->parent_id = $request->parent_id;
     //insert images also
-    if (count($request->image) > 0) {
+    if ($request->image > 0) {
         $image = $request->file('image');
         $img = time() . '.'. $image->getClientOriginalExtension();
         $location = public_path('images/categories/' .$img);

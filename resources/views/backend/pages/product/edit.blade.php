@@ -29,6 +29,30 @@
               <label for="exampleInputEmail1">Quantity</label>
               <input type="number" class="form-control" name="quantity" id="exampleInputEmail1" value="{{ $product->quantity }}">
             </div>
+             <div class="form-group">
+              <label for="exampleInputEmail1">Select Category</label>
+              <select class="form-control" name="category_id">
+                <option value="">Please select a category for the product</option>
+                @foreach (App\Models\Category::orderBy('name', 'asc')->where('parent_id', NULL)->get() as $parent)
+                  <option value="{{ $parent->id }}" {{ $parent->id == $product->category->id ? 'selected': '' }}>{{ $parent->name }}</option>
+
+                  @foreach (App\Models\Category::orderBy('name', 'asc')->where('parent_id', $parent->id)->get() as $child)
+                    <option value="{{ $child->id }}"  {{ $child->id == $product->category->id ? 'selected': '' }}> ------> {{ $child->name }}</option>
+
+                  @endforeach
+
+                @endforeach
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputEmail1">Select Brand</label>
+              <select class="form-control" name="brand_id">
+                <option value="">Please select a brand for the product</option>
+                @foreach (App\Models\Brand::orderBy('name', 'asc')->get() as $br)
+                  <option value="{{ $br->id }}" {{ $br->id == $product->brand->id ? 'selected': ''}}>{{ $br->name }}</option>
+                @endforeach
+              </select>
+            </div>
             <div class="form-group">
               <label for="product_image">Product Image</label>
 

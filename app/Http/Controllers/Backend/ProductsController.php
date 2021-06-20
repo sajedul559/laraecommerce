@@ -19,7 +19,8 @@ class ProductsController extends Controller
 
   public function create()
   {
-    return view('backend.pages.product.create');
+    $products = Product::all();
+    return view('backend.pages.product.create',compact('products'));
   }
 
   public function edit($id)
@@ -37,6 +38,8 @@ class ProductsController extends Controller
       'description'     => 'required',
       'price'             => 'required|numeric',
       'quantity'             => 'required|numeric',
+       'category_id'          => 'required|numeric',
+      'brand_id'              => 'required|numeric',
     ]);
 
 
@@ -49,8 +52,8 @@ class ProductsController extends Controller
     $product->quantity = $request->quantity;
 
     $product->slug = str_slug($request->title);
-    $product->category_id = 1;
-    $product->brand_id = 1;
+    $product->category_id = $request->category_id;
+    $product->brand_id = $request->brand_id;
     $product->admin_id = 1;
     $product->save();
 
@@ -68,7 +71,7 @@ class ProductsController extends Controller
     //   $product_image->image = $img;
     //   $product_image->save();
     // }
-    if (count($request->product_image) > 0) {
+    if ($request->product_image > 0) {
       foreach ($request->product_image as $image) {
 
         //insert that image
@@ -94,7 +97,9 @@ class ProductsController extends Controller
       'title'         => 'required|max:150',
       'description'     => 'required',
       'price'             => 'required|numeric',
-      'quantity'             => 'required|numeric',
+      'quantity'            => 'required|numeric',
+      'category_id'          => 'required|numeric',
+      'brand_id'              => 'required|numeric',
     ]);
 
     $product = Product::find($id);
@@ -103,6 +108,8 @@ class ProductsController extends Controller
     $product->description = $request->description;
     $product->price = $request->price;
     $product->quantity = $request->quantity;
+     $product->category_id = $request->category_id;
+    $product->brand_id = $request->brand_id;
     $product->save();
 
     return redirect()->route('admin.products');
