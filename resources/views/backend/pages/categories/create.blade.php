@@ -24,8 +24,9 @@
             </div>
 
             <div class="form-group">
-              <label for="exampleInputPassword1">Parent Category</label>
+              <label for="exampleInputPassword1">Parent Category (optional)</label>
               <select class="form-control" name="parent_id">
+                <option value="">Please select a Parent category</option>
                 @foreach ($main_categories as $category)
                   <option value="{{ $category->id }}">{{ $category->name }}</option>
                 @endforeach
@@ -33,7 +34,7 @@
 
             </div>
             <div class="form-group">
-              <label for="image">Category Image</label>
+              <label for="image">Category Image (optional)</label>
               <input type="file" class="form-control" name="image" id="image" >
             </div>
 

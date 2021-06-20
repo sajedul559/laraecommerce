@@ -2,7 +2,9 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Laravel Ecommerce Project</title>
+  <title>
+    @yield('title', 'Laravel Ecommerce Project')
+  </title>
 
   @include('frontend.partials.styles')
 </head>

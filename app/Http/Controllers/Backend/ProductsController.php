@@ -84,11 +84,8 @@ class ProductsController extends Controller
 
       }
     }
-    
-        session()->flash('success', 'A   added successfully !!');
 
-
-    return redirect()->route('admin.products');
+    return redirect()->route('admin.product.create');
   }
   public function update(Request $request, $id)
   {

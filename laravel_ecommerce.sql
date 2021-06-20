@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 20, 2018 at 05:11 PM
+-- Generation Time: Jul 21, 2018 at 06:32 AM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -70,10 +70,9 @@ CREATE TABLE `categories` (
 --
 
 INSERT INTO `categories` (`id`, `name`, `description`, `image`, `parent_id`, `created_at`, `updated_at`) VALUES
-(1, 'Test', 'Test category', NULL, NULL, '2018-07-20 14:28:45', '2018-07-20 14:28:45'),
-(2, 'Programming', 'Programming', NULL, 1, '2018-07-20 14:44:26', '2018-07-20 14:44:26'),
-(3, 'Programming 2', NULL, NULL, 1, '2018-07-20 09:03:40', '2018-07-20 09:03:40'),
-(4, 'Category with Image', NULL, '1532099266.jpg', 1, '2018-07-20 09:07:47', '2018-07-20 09:07:47');
+(1, 'Fashion', 'Fashion Category', '1532145104.jpg', NULL, '2018-07-20 21:51:44', '2018-07-20 21:51:44'),
+(2, 'Sunglass', NULL, '1532145185.jpg', 1, '2018-07-20 21:53:05', '2018-07-20 21:53:05'),
+(3, 'Household', NULL, '1532145244.jpg', NULL, '2018-07-20 21:54:04', '2018-07-20 21:54:04');
 
 -- --------------------------------------------------------
 
@@ -139,8 +138,8 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `category_id`, `brand_id`, `title`, `description`, `slug`, `quantity`, `price`, `status`, `offer_price`, `admin_id`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 'Samsung Galaxy', 'Samsung GalaxySamsung GalaxySamsung Galaxy\r\n\r\nSamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung Galaxy\r\n\r\nSamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung Galaxy', 'Samsung-Galaxy', 1, 10000, 1, NULL, 1, '2018-02-21 18:00:00', '2018-02-21 18:00:00'),
-(2, 1, 1, 'Samsung Galaxy 2', 'Samsung GalaxySamsung GalaxySamsung Galaxy\r\n\r\nSamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung Galaxy\r\n\r\nSamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung Galaxy', 'Samsung-Galaxy-2', 1, 10000, 1, NULL, 1, '2018-02-21 18:00:00', '2018-02-21 18:00:00');
+(1, 1, 1, 'Iphone 8', 'Iphone', 'Iphone-8', 1, 10000, 1, NULL, 1, '2018-02-21 18:00:00', '2018-02-21 18:00:00'),
+(2, 1, 1, 'Samsung Galaxy 2', 'Samsung GalaxySamsung GalaxySamsung Galaxy\r\n\r\nSamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung Galaxy\r\n\r\nSamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung Galaxy', 'Samsung-Galaxy-2', 0, 10000, 1, NULL, 1, '2018-02-21 18:00:00', '2018-02-21 18:00:00');
 
 -- --------------------------------------------------------
 
@@ -164,8 +163,8 @@ INSERT INTO `product_images` (`id`, `product_id`, `image`, `created_at`, `update
 (1, 1, '1.png', NULL, NULL),
 (2, 2, '2.png', NULL, NULL),
 (3, 1, '3.png', NULL, NULL),
-(4, 5, '1519483410.png', '2018-02-24 08:43:31', '2018-02-24 08:43:31'),
-(5, 6, '1519483895.png', '2018-02-24 08:51:35', '2018-02-24 08:51:35'),
+(4, 2, '1519483410.png', '2018-02-24 08:43:31', '2018-02-24 08:43:31'),
+(5, 2, '1519483895.png', '2018-02-24 08:51:35', '2018-02-24 08:51:35'),
 (6, 6, '1519483895.png', '2018-02-24 08:51:35', '2018-02-24 08:51:35');
 
 -- --------------------------------------------------------
@@ -255,7 +254,7 @@ ALTER TABLE `brands`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `migrations`
 --

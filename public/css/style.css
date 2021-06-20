@@ -1,4 +1,22 @@
 
+
+/** Product CSS **/
+.product-item{
+  background: #dcf4fc;
+}
+.child-rows {
+    padding-left: 20px;
+    border-left: 1px solid #dfdfdf;
+    background: #FFF;
+}
+.child-rows a.list-group-item{
+  border-left: 0px!important;
+}
+/** End Product CSS **/
+
+
+
+
 /**
  * Override CSS's
  */
