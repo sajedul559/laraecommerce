@@ -6,7 +6,7 @@
 
       <div class="card">
         <div class="card-header">
-          Manage Product
+          Manage Divisions
         </div>
         <div class="card-body">
             @include('backend.partials.messages')
@@ -22,10 +22,8 @@
               <tr>
                 <td>#</td>
                 <td>{{ $division->name }}</td>
-                <td>
-                  {{$division->priority}}
-                </td>
-                
+                <td>{{ $division->priority }}</td>
+
                 <td>
                   <a href="{{ route('admin.division.edit', $division->id) }}" class="btn btn-success">Edit</a>
 

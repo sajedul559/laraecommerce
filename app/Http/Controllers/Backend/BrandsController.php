@@ -11,8 +11,6 @@ use File;
 
 class BrandsController extends Controller
 {
- 
-  
   public function index()
   {
     $brands = Brand::orderBy('id', 'desc')->get();
@@ -39,7 +37,7 @@ class BrandsController extends Controller
     $brand->name = $request->name;
     $brand->description = $request->description;
     //insert images also
-    if ($request->image > 0) {
+    if (count($request->image) > 0) {
         $image = $request->file('image');
         $img = time() . '.'. $image->getClientOriginalExtension();
         $location = public_path('images/brands/' .$img);
@@ -79,7 +77,7 @@ class BrandsController extends Controller
       $brand->name = $request->name;
       $brand->description = $request->description;
       //insert images also
-      if ($request->image > 0) {
+      if (count($request->image) > 0) {
         //Delete the old image from folder
 
           if (File::exists('images/brands/'.$brand->image)) {

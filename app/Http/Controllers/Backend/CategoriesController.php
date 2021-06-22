@@ -39,7 +39,7 @@ class CategoriesController extends Controller
     $category->description = $request->description;
     $category->parent_id = $request->parent_id;
     //insert images also
-    if ($request->image > 0) {
+    if (count($request->image) > 0) {
         $image = $request->file('image');
         $img = time() . '.'. $image->getClientOriginalExtension();
         $location = public_path('images/categories/' .$img);
@@ -117,7 +117,7 @@ class CategoriesController extends Controller
             }
             $sub->delete();
           }
-          
+
         }
 
         // Delete category image
@@ -126,7 +126,7 @@ class CategoriesController extends Controller
         }
         $category->delete();
       }
-      session()->flash('success', 'Product has deleted successfully !!');
+      session()->flash('success', 'Brand has deleted successfully !!');
       return back();
 
     }

@@ -57,7 +57,7 @@ return [
 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'sajedulkhairul@gmail.com'),
-        'name' => env('MAIL_FROM_NAME', 'LaraEcommerce'),
+        'name' => env('MAIL_FROM_NAME', 'Laravel Ecommerce'),
     ],
 
     /*
@@ -101,6 +101,23 @@ return [
 
     'sendmail' => '/usr/sbin/sendmail -bs',
 
+
+
+      /*
+      |--------------------------------------------------------------------------
+      | To remove stream_socket_enable_crypto() Error
+      |--------------------------------------------------------------------------
+      */
+      'stream' => [
+        'ssl' => [
+          'allow_self_signed' => true,
+          'verify_peer' => false,
+          'verify_peer_name' => false,
+        ],
+      ],
+
+
+      
     /*
     |--------------------------------------------------------------------------
     | Markdown Mail Settings

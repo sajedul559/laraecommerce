@@ -12,7 +12,6 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 
 use App\Models\Division;
 use App\Models\District;
-
 use App\Notifications\VerifyRegistration;
 
 class RegisterController extends Controller
@@ -35,7 +34,7 @@ class RegisterController extends Controller
   *
   * @var string
   */
-  protected $redirectTo = '/';
+  protected $redirectTo = 'login';
 
   /**
   * Create a new controller instance.
@@ -109,10 +108,10 @@ class RegisterController extends Controller
       'status'  => 0,
     ]);
 
-   // $user->notify(new VerifyRegistration($user));
+    $user->notify(new VerifyRegistration($user));
 
     session()->flash('success', 'A confirmation email has sent to you.. Please check and confirm your email');
-    return redirect('/');
+    return redirect('/');;
 
 
   }

@@ -17,15 +17,19 @@ Route::get('/contact', 'Frontend\PagesController@contact')->name('contact');
 
 
 /*
- Product Routes
- All the routes for our product for frontend
+Product Routes
+All the routes for our product for frontend
 */
-Route::get('/products', 'Frontend\ProductsController@index')->name('products');
-Route::get('/product/{slug}', 'Frontend\ProductsController@show')->name('products.show');
-Route::get('/search', 'Frontend\PagesController@search')->name('search');
+Route::group(['prefix' => 'products'], function(){
 
-Route::get('/category{id}', 'Frontend\CategoriesController@show')->name('categories.show');
-//Route::get('/category', 'Frontend\CategoriesController@categories')->name('categories.index');
+  Route::get('/', 'Frontend\ProductsController@index')->name('products');
+  Route::get('/{slug}', 'Frontend\ProductsController@show')->name('products.show');
+  Route::get('/new/search', 'Frontend\PagesController@search')->name('search');
+
+  //Category Routes
+  Route::get('/categories', 'Frontend\CategoriesController@index')->name('categories.index');
+  Route::get('/category/{id}', 'Frontend\CategoriesController@show')->name('categories.show');
+});
 
 
 
@@ -35,7 +39,7 @@ Route::group(['prefix' => 'admin'], function(){
   Route::get('/', 'Backend\PagesController@index')->name('admin.index');
 
 
-// Product Routes
+  // Product Routes
   Route::group(['prefix' => '/products'], function(){
     Route::get('/', 'Backend\ProductsController@index')->name('admin.products');
     Route::get('/create', 'Backend\ProductsController@create')->name('admin.product.create');
@@ -48,7 +52,7 @@ Route::group(['prefix' => 'admin'], function(){
   });
 
 
-// Category Routes
+  // Category Routes
   Route::group(['prefix' => '/categories'], function(){
     Route::get('/', 'Backend\CategoriesController@index')->name('admin.categories');
     Route::get('/create', 'Backend\CategoriesController@create')->name('admin.category.create');
@@ -60,8 +64,7 @@ Route::group(['prefix' => 'admin'], function(){
     Route::post('/category/delete/{id}', 'Backend\CategoriesController@delete')->name('admin.category.delete');
   });
 
-
-// Brand  Routes
+  // Brand Routes
   Route::group(['prefix' => '/brands'], function(){
     Route::get('/', 'Backend\BrandsController@index')->name('admin.brands');
     Route::get('/create', 'Backend\BrandsController@create')->name('admin.brand.create');
@@ -72,7 +75,8 @@ Route::group(['prefix' => 'admin'], function(){
     Route::post('/brand/edit/{id}', 'Backend\BrandsController@update')->name('admin.brand.update');
     Route::post('/brand/delete/{id}', 'Backend\BrandsController@delete')->name('admin.brand.delete');
   });
-   // Division Routes
+
+  // Division Routes
   Route::group(['prefix' => '/divisions'], function(){
     Route::get('/', 'Backend\DivisionsController@index')->name('admin.divisions');
     Route::get('/create', 'Backend\DivisionsController@create')->name('admin.division.create');
@@ -83,7 +87,8 @@ Route::group(['prefix' => 'admin'], function(){
     Route::post('/division/edit/{id}', 'Backend\DivisionsController@update')->name('admin.division.update');
     Route::post('/division/delete/{id}', 'Backend\DivisionsController@delete')->name('admin.division.delete');
   });
-   // District Routes
+
+  // District Routes
   Route::group(['prefix' => '/districts'], function(){
     Route::get('/', 'Backend\DistrictsController@index')->name('admin.districts');
     Route::get('/create', 'Backend\DistrictsController@create')->name('admin.district.create');
@@ -94,6 +99,12 @@ Route::group(['prefix' => 'admin'], function(){
     Route::post('/district/edit/{id}', 'Backend\DistrictsController@update')->name('admin.district.update');
     Route::post('/district/delete/{id}', 'Backend\DistrictsController@delete')->name('admin.district.delete');
   });
+
+
+  //User Routes
+
+Route::get('/token/{token}', 'Frontend\VerificationController@verify')->name('user.verification');
+
 
 
 });

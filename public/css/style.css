@@ -1,11 +1,10 @@
-/** Navbar CSS **/
-.mr-auto, .mx-auto{
-  margin-right:auto!important;
-  margin-top: 8px;
-  margin-bottom: -10px;
-}
 
-/** End Navbar CSS  **/
+/** Navbar CSS **/
+.mr-auto, .mx-auto {
+    margin-top: 12px;
+    margin-bottom: -10px;
+}
+/** End Navbar CSS **/
 
 /** Product CSS **/
 .product-item{

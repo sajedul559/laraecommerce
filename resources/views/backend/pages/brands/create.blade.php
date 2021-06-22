@@ -14,22 +14,22 @@
             @include('backend.partials.messages')
             <div class="form-group">
               <label for="name">Name</label>
-              <input type="text" class="form-control" name="name" id="name" aria-describedby="emailHelp" placeholder="Enter brand Name">
+              <input type="text" class="form-control" name="name" id="name" aria-describedby="emailHelp" placeholder="Enter Brand Name">
             </div>
 
             <div class="form-group">
               <label for="exampleInputPassword1">Description</label>
               <textarea name="description" rows="8" cols="80" class="form-control"></textarea>
-
             </div>
 
+
             <div class="form-group">
-              <label for="image">brand Image (optional)</label>
+              <label for="image">Brand Image (optional)</label>
               <input type="file" class="form-control" name="image" id="image" >
             </div>
 
 
-            <button type="submit" class="btn btn-primary">Add Brand </button>
+            <button type="submit" class="btn btn-primary">Add Brand</button>
           </form>
         </div>
       </div>

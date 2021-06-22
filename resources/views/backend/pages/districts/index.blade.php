@@ -6,7 +6,7 @@
 
       <div class="card">
         <div class="card-header">
-          Manage District
+          Manage Districts
         </div>
         <div class="card-body">
             @include('backend.partials.messages')
@@ -22,10 +22,8 @@
               <tr>
                 <td>#</td>
                 <td>{{ $district->name }}</td>
-                <td>
-                  {{$district->division->name}}
-                </td>
-                
+                <td>{{ $district->division->name }}</td>
+
                 <td>
                   <a href="{{ route('admin.district.edit', $district->id) }}" class="btn btn-success">Edit</a>
 

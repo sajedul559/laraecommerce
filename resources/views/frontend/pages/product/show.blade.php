@@ -30,18 +30,17 @@
             <span class="sr-only">Next</span>
           </a>
         </div>
-        <div>
-          <p>Category <span class="badge badge-primary">{{ $product->category->name}}</span></p>
-          <p>Brand <span class="badge badge-primary"> {{ $product->brand->name}}</span></p>
+
+        <div class="mt-3">
+          <p>Category <span class="badge badge-info">{{ $product->category->name }}</span></p>
+          <p>Brand <span class="badge badge-info">{{ $product->brand->name }}</span></p>
         </div>
 
       </div>
 
-
-
       <div class="col-md-8">
         <div class="widget">
-          <h3> {{ $product->title }} in <mark> {{$product->category->name}} category</mark> </h3> 
+          <h3> {{ $product->title }}</h3>
           <h3> {{ $product->price }} Taka
             <span class="badge badge-primary">
               {{ $product->quantity  < 1 ? 'No Item is Available' : $product->quantity.' item in stock' }}

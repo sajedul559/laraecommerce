@@ -29,9 +29,6 @@
               <label for="exampleInputEmail1">Quantity</label>
               <input type="number" class="form-control" name="quantity" id="exampleInputEmail1">
             </div>
-             </div>
-            
-              </div>
             <div class="form-group">
               <label for="exampleInputEmail1">Select Category</label>
               <select class="form-control" name="category_id">

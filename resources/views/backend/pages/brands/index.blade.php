@@ -6,7 +6,7 @@
 
       <div class="card">
         <div class="card-header">
-          Manage Product
+          Manage Brands
         </div>
         <div class="card-body">
             @include('backend.partials.messages')
@@ -14,8 +14,7 @@
             <tr>
               <th>#</th>
               <th>Brand Name</th>
-              <th>Brand  Image</th>
-
+              <th>Brand Image</th>
               <th>Action</th>
             </tr>
 
@@ -25,7 +24,8 @@
                 <td>{{ $brand->name }}</td>
                 <td>
                   <img src="{!! asset('images/brands/'.$brand->image) !!}" width="100">
-               
+                </td>
+
                 <td>
                   <a href="{{ route('admin.brand.edit', $brand->id) }}" class="btn btn-success">Edit</a>
 

@@ -13,16 +13,14 @@
             @csrf
             @include('backend.partials.messages')
             <div class="form-group">
-              <label for="name"> Name</label>
+              <label for="name">Name</label>
               <input type="text" class="form-control" name="name" id="name" aria-describedby="emailHelp" placeholder="Enter Division Name">
             </div>
 
             <div class="form-group">
-              <label for="exampleInputPassword1">Priority</label>
-              <input type="number" class="form-control" name="priority" id="priority" aria-describedby="emailHelp" placeholder="Enter Priority">
-
+              <label for="priority">priority</label>
+              <input type="text" class="form-control" name="priority" id="priority" aria-describedby="emailHelp" placeholder="Enter Division priority">
             </div>
-
 
             <button type="submit" class="btn btn-primary">Add Division</button>
           </form>

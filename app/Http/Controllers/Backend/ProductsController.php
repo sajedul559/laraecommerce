@@ -19,8 +19,7 @@ class ProductsController extends Controller
 
   public function create()
   {
-    $products = Product::all();
-    return view('backend.pages.product.create',compact('products'));
+    return view('backend.pages.product.create');
   }
 
   public function edit($id)
@@ -38,8 +37,8 @@ class ProductsController extends Controller
       'description'     => 'required',
       'price'             => 'required|numeric',
       'quantity'             => 'required|numeric',
-       'category_id'          => 'required|numeric',
-      'brand_id'              => 'required|numeric',
+      'category_id'             => 'required|numeric',
+      'brand_id'             => 'required|numeric',
     ]);
 
 
@@ -71,7 +70,7 @@ class ProductsController extends Controller
     //   $product_image->image = $img;
     //   $product_image->save();
     // }
-    if ($request->product_image > 0) {
+    if (count($request->product_image) > 0) {
       foreach ($request->product_image as $image) {
 
         //insert that image
@@ -97,9 +96,9 @@ class ProductsController extends Controller
       'title'         => 'required|max:150',
       'description'     => 'required',
       'price'             => 'required|numeric',
-      'quantity'            => 'required|numeric',
-      'category_id'          => 'required|numeric',
-      'brand_id'              => 'required|numeric',
+      'quantity'             => 'required|numeric',
+      'category_id'             => 'required|numeric',
+      'brand_id'             => 'required|numeric',
     ]);
 
     $product = Product::find($id);
@@ -108,7 +107,7 @@ class ProductsController extends Controller
     $product->description = $request->description;
     $product->price = $request->price;
     $product->quantity = $request->quantity;
-     $product->category_id = $request->category_id;
+    $product->category_id = $request->category_id;
     $product->brand_id = $request->brand_id;
     $product->save();
 
