@@ -12,6 +12,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 
 use App\Models\Division;
 use App\Models\District;
+
 use App\Notifications\VerifyRegistration;
 
 class RegisterController extends Controller
@@ -34,7 +35,7 @@ class RegisterController extends Controller
   *
   * @var string
   */
-  protected $redirectTo = 'login';
+  protected $redirectTo = '/';
 
   /**
   * Create a new controller instance.

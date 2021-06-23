@@ -32,6 +32,13 @@ Route::group(['prefix' => 'products'], function(){
 });
 
 
+// User Routes
+Route::group(['prefix' => 'user'], function(){
+Route::get('/token/{token}', 'Frontend\VerificationController@verify')->name('user.verification');
+Route::get('/dashboard', 'Frontend\UsersController@dashboard')->name('user.dashboard');
+Route::get('/profile', 'Frontend\UsersController@profile')->name('user.profile');
+Route::post('/profile/update', 'Frontend\UsersController@profileUpdate')->name('user.profile.update');
+});
 
 
 // Admin Routes
@@ -99,11 +106,6 @@ Route::group(['prefix' => 'admin'], function(){
     Route::post('/district/edit/{id}', 'Backend\DistrictsController@update')->name('admin.district.update');
     Route::post('/district/delete/{id}', 'Backend\DistrictsController@delete')->name('admin.district.delete');
   });
-
-
-  //User Routes
-
-Route::get('/token/{token}', 'Frontend\VerificationController@verify')->name('user.verification');
 
 
 

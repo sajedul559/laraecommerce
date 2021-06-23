@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 22, 2018 at 07:20 AM
+-- Generation Time: Aug 28, 2018 at 05:21 AM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -264,7 +264,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `phone_no`, `email`, `password`, `street_address`, `division_id`, `district_id`, `status`, `ip_address`, `avatar`, `shipping_address`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Maniruzzaman', 'Akash', 'maniruzzamanakash', '01951233084', 'manirujjamanakash@gmail.com', '$2y$10$/h2lvOsjYjOr3taAqWIt.OoQKo5kUEn9yBqtNVGFQHe77ftnCbjF6', 'Patuakhali, Bangladesh', 4, 2, 0, '::1', NULL, NULL, 'R5Z80EzxiqFV7oD8FdhCGFplVyMsx77Hh25WA3eaulO8o0Vbv5iLjT46DHLd', '2018-07-21 07:06:04', '2018-07-21 07:06:04');
+(8, 'Maniruzzaman', 'Akash', 'maniruzzamanakash2', '1951233084', 'manirujjamanakash@gmail.com', '$2y$10$hFKyIY6GoQ.anijWOknn7eKyXKn9xQC7jvWthDPs3./hXG3tXQ8Gi', 'Patuakhali, Bangladesh', 4, 2, 1, '::1', NULL, 'New', '4bqFsIBP7Y6e4Jlfb9yMwE8UUhZBpdTO0abQbCj4q5M0hvBshpuS1NmyC2CM', '2018-07-22 00:35:46', '2018-08-27 19:45:20');
 
 --
 -- Indexes for dumped tables
@@ -381,7 +381,7 @@ ALTER TABLE `product_images`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;COMMIT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
