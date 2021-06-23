@@ -39,6 +39,13 @@ Route::post('/update/{id}', 'Frontend\CartsController@update')->name('carts.upda
 Route::post('/delete/{id}', 'Frontend\CartsController@destroy')->name('carts.delete');
 });
 
+// User Routes
+Route::group(['prefix' => 'user'], function(){
+Route::get('/token/{token}', 'Frontend\VerificationController@verify')->name('user.verification');
+Route::get('/dashboard', 'Frontend\UsersController@dashboard')->name('user.dashboard');
+Route::get('/profile', 'Frontend\UsersController@profile')->name('user.profile');
+Route::post('/profile/update', 'Frontend\UsersController@profileUpdate')->name('user.profile.update');
+});
 
 // User Routes
 Route::group(['prefix' => 'user'], function(){
