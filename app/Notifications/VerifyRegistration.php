@@ -6,14 +6,15 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+
 use App\Models\User;
 
 class VerifyRegistration extends Notification
 {
     use Queueable;
-    public $user;
-    public $token;
 
+    public $user;
+    
     /**
      * Create a new notification instance.
      *
@@ -44,8 +45,8 @@ class VerifyRegistration extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('Confirm Your Email.')
-                    ->action('Click here to Acivate', route('user.verification', $this->user->remember_token))
+                    ->line('Confirm Your Email..')
+                    ->action('Click here to activate', route('user.verification', $this->user->remember_token))
                     ->line('Thank you for using our application!');
     }
 

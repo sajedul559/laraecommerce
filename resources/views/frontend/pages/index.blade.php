@@ -1,7 +1,6 @@
 @extends('frontend.layouts.master')
 
 @section('content')
-
   <!-- Start Sidebar + Content -->
   <div class='container margin-top-20'>
     <div class="row">

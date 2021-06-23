@@ -31,7 +31,22 @@ Route::group(['prefix' => 'products'], function(){
   Route::get('/category/{id}', 'Frontend\CategoriesController@show')->name('categories.show');
 });
 
+// Cart Routes
+Route::group(['prefix' => 'carts'], function(){
+Route::get('/', 'Frontend\CartsController@index')->name('carts');
+Route::post('/store', 'Frontend\CartsController@store')->name('carts.store');
+Route::post('/update/{id}', 'Frontend\CartsController@update')->name('carts.update');
+Route::post('/delete/{id}', 'Frontend\CartsController@destroy')->name('carts.delete');
+});
 
+
+// User Routes
+Route::group(['prefix' => 'user'], function(){
+Route::get('/token/{token}', 'Frontend\VerificationController@verify')->name('user.verification');
+Route::get('/dashboard', 'Frontend\UsersController@dashboard')->name('user.dashboard');
+Route::get('/profile', 'Frontend\UsersController@profile')->name('user.profile');
+Route::post('/profile/update', 'Frontend\UsersController@profileUpdate')->name('user.profile.update');
+});
 
 
 // Admin Routes
@@ -76,6 +91,8 @@ Route::group(['prefix' => 'admin'], function(){
     Route::post('/brand/delete/{id}', 'Backend\BrandsController@delete')->name('admin.brand.delete');
   });
 
+
+
   // Division Routes
   Route::group(['prefix' => '/divisions'], function(){
     Route::get('/', 'Backend\DivisionsController@index')->name('admin.divisions');
@@ -99,11 +116,6 @@ Route::group(['prefix' => 'admin'], function(){
     Route::post('/district/edit/{id}', 'Backend\DistrictsController@update')->name('admin.district.update');
     Route::post('/district/delete/{id}', 'Backend\DistrictsController@delete')->name('admin.district.delete');
   });
-
-
-  //User Routes
-
-Route::get('/token/{token}', 'Frontend\VerificationController@verify')->name('user.verification');
 
 
 
