@@ -75,7 +75,7 @@
 
       <div class="float-right">
         <a href="{{ route('products') }}" class="btn btn-info btn-lg">Continue Shopping..</a>
-        <a href=" " class="btn btn-warning btn-lg">Checkout</a>
+        <a href=" {{route('checkouts')}} " class="btn btn-warning btn-lg">Checkout</a>
       </div>
     @else
       <div class="alert alert-warning">

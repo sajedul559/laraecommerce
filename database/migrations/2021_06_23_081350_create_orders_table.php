@@ -33,7 +33,9 @@ class CreateOrdersTable extends Migration
       ->references('id')->on('users')
       ->onDelete('cascade');
 
-     
+      $table->foreign('payment_id')
+      ->references('id')->on('payments')
+      ->onDelete('cascade');
 
     });
     }

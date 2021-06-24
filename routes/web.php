@@ -31,6 +31,12 @@ Route::group(['prefix' => 'products'], function(){
   Route::get('/category/{id}', 'Frontend\CategoriesController@show')->name('categories.show');
 });
 
+// Checkout Routes
+Route::group(['prefix' => 'checkout'], function(){
+Route::get('/', 'Frontend\CheckoutsController@index')->name('checkouts');
+Route::post('/store', 'Frontend\CheckoutsController@store')->name('checkouts.store');
+});
+
 // Cart Routes
 Route::group(['prefix' => 'carts'], function(){
 Route::get('/', 'Frontend\CartsController@index')->name('carts');
