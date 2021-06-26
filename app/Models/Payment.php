@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Payment extends Model
 {
-      public $fillable = [
+    public $fillable = [
     	'name',
     	'image',
     	'priority',

@@ -4,16 +4,32 @@ namespace App\Http\Controllers\Frontend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+
 use App\Models\Payment;
+use App\Models\Order;
+use App\Models\Cart;
+use Auth;
 
 class CheckoutsController extends Controller
 {
-     public function index()
+  /**
+  * Display a listing of the resource.
+  *
+  * @return \Illuminate\Http\Response
+  */
+  public function index()
   {
     $payments = Payment::orderBy('priority', 'asc')->get();
     return view('frontend.pages.checkouts', compact('payments'));
   }
- public function store(Request $request)
+
+  /**
+  * Store a newly created resource in storage.
+  *
+  * @param  \Illuminate\Http\Request  $request
+  * @return \Illuminate\Http\Response
+  */
+  public function store(Request $request)
   {
     $this->validate($request, [
       'name'  => 'required',
@@ -56,7 +72,4 @@ class CheckoutsController extends Controller
     session()->flash('success', 'Your order has taken successfully !!! Please wait admin will soon confirm it.');
     return redirect()->route('index');
   }
-
-
-
 }

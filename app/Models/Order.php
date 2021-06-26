@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-   public $fillable = [
+  public $fillable = [
     'user_id',
     'ip_address',
     'payment_id',
@@ -35,4 +35,5 @@ class Order extends Model
   {
     return $this->belongsTo(Payment::class);
   }
+
 }

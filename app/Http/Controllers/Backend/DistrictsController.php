@@ -10,6 +10,11 @@ use App\Models\Division;
 
 class DistrictsController extends Controller
 {
+  public function __construct()
+  {
+    $this->middleware('auth:admin');
+  }
+  
   public function index()
   {
     $districts = District::orderBy('name', 'asc')->get();

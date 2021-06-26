@@ -1,14 +1,14 @@
 <?php
 
 namespace App\Models;
-use Auth;
-
 
 use Illuminate\Database\Eloquent\Model;
 
+use Auth;
+
 class Cart extends Model
 {
-     public $fillable = [
+  public $fillable = [
     'user_id',
     'ip_address',
     'product_id',
@@ -69,4 +69,6 @@ class Cart extends Model
     }
     return $total_item;
   }
+
+
 }

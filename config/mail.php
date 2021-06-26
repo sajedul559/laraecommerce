@@ -57,7 +57,7 @@ return [
 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'sajedulkhairul@gmail.com'),
-        'name' => env('MAIL_FROM_NAME', 'Laravel Ecommerce'),
+        'name' => env('MAIL_FROM_NAME', 'Laravel Ecommerce Site'),
     ],
 
     /*
@@ -117,7 +117,7 @@ return [
       ],
 
 
-      
+
     /*
     |--------------------------------------------------------------------------
     | Markdown Mail Settings

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 28, 2018 at 05:21 AM
+-- Generation Time: Oct 05, 2018 at 07:55 AM
 -- Server version: 10.1.25-MariaDB
 -- PHP Version: 7.1.7
 
@@ -19,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ecommerces`
+-- Database: `laravel_ecommerce_tutorial`
 --
 
 -- --------------------------------------------------------
@@ -30,9 +30,23 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `admins` (
   `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone_no` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `avatar` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `type` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Super Admin' COMMENT 'Admin|Super Admin',
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `admins`
+--
+
+INSERT INTO `admins` (`id`, `name`, `email`, `password`, `phone_no`, `avatar`, `type`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Maniruzzaman', 'manirujjamanakash@gmail.com', '$2y$10$mczx1Yyh.YYQ5LNqx.0vbuPfqUKaqcJaXHUTk0q3Q5syrpbWb9VKO', '01951233084', NULL, 'Super Admin', 'k0pg6dbf22vBmzlvvxph92bPlpxkqxTVxVaFvDEsgodjvx5yB2TtOUFTa8s3', '2018-08-28 23:18:25', '2018-08-30 21:06:13');
 
 -- --------------------------------------------------------
 
@@ -57,6 +71,33 @@ INSERT INTO `brands` (`id`, `name`, `description`, `image`, `created_at`, `updat
 (2, 'Sony', NULL, '1532150006.png', '2018-07-20 23:13:26', '2018-07-20 23:13:26'),
 (3, 'Samsung', NULL, '1532150024.png', '2018-07-20 23:13:44', '2018-07-20 23:13:44'),
 (4, 'Others', NULL, '1532150085.png', '2018-07-20 23:14:46', '2018-07-20 23:14:46');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `carts`
+--
+
+CREATE TABLE `carts` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `product_id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED DEFAULT NULL,
+  `order_id` int(10) UNSIGNED DEFAULT NULL,
+  `ip_address` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `product_quantity` int(11) NOT NULL DEFAULT '1',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `carts`
+--
+
+INSERT INTO `carts` (`id`, `product_id`, `user_id`, `order_id`, `ip_address`, `product_quantity`, `created_at`, `updated_at`) VALUES
+(4, 2, 8, 4, '::1', 1, '2018-08-27 22:33:46', '2018-10-04 23:37:42'),
+(5, 3, NULL, NULL, '::1', 1, '2018-08-30 06:28:25', '2018-08-30 06:28:25'),
+(6, 2, NULL, NULL, '::1', 1, '2018-08-30 06:29:18', '2018-08-30 06:29:18'),
+(7, 1, NULL, NULL, '::1', 2, '2018-08-30 06:29:29', '2018-08-30 06:29:35');
 
 -- --------------------------------------------------------
 
@@ -157,11 +198,49 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (4, '2018_02_22_165732_create_products_table', 2),
 (5, '2018_02_23_014906_create_categories_table', 2),
 (6, '2018_02_23_015040_create_brands_table', 2),
-(7, '2018_02_23_015128_create_admins_table', 2),
 (8, '2018_02_23_020211_create_product_images_table', 2),
 (10, '2014_10_12_000000_create_users_table', 3),
 (11, '2018_07_21_115850_create_divisions_table', 4),
-(12, '2018_07_21_115908_create_districts_table', 4);
+(12, '2018_07_21_115908_create_districts_table', 4),
+(14, '2018_08_28_034133_create_carts_table', 5),
+(15, '2018_08_28_083714_create_settings_table', 6),
+(16, '2018_08_28_085245_create_payments_table', 7),
+(17, '2018_08_28_033110_create_orders_table', 8),
+(18, '2018_02_23_015128_create_admins_table', 9);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED DEFAULT NULL,
+  `payment_id` int(10) UNSIGNED DEFAULT NULL,
+  `ip_address` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone_no` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `shipping_address` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `message` text COLLATE utf8mb4_unicode_ci,
+  `is_paid` tinyint(1) NOT NULL DEFAULT '0',
+  `is_completed` tinyint(1) NOT NULL DEFAULT '0',
+  `is_seen_by_admin` tinyint(1) NOT NULL DEFAULT '0',
+  `transaction_id` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `user_id`, `payment_id`, `ip_address`, `name`, `phone_no`, `shipping_address`, `email`, `message`, `is_paid`, `is_completed`, `is_seen_by_admin`, `transaction_id`, `created_at`, `updated_at`) VALUES
+(1, 8, 2, NULL, 'Maniruzzaman Akash', '1951233084', 'Dumki', 'manirujjamanakash@gmail.com', NULL, 1, 1, 1, NULL, '2018-08-28 20:01:58', '2018-08-28 20:01:58'),
+(2, 8, 1, '::1', 'Maniruzzaman Akash', '1951233084', 'New', 'manirujjamanakash@gmail.com', NULL, 1, 1, 1, NULL, '2018-08-28 20:03:57', '2018-10-04 23:49:14'),
+(3, 8, 2, '::1', 'Maniruzzaman Akash', '1951233084', 'New', 'manirujjamanakash@gmail.com', NULL, 0, 0, 0, '24343434', '2018-08-28 20:09:29', '2018-08-28 20:09:29'),
+(4, 8, 1, '::1', 'Maniruzzaman Akash', '1951233084', 'New', 'manirujjamanakash@gmail.com', NULL, 1, 1, 0, NULL, '2018-08-28 20:09:58', '2018-10-04 23:48:19');
 
 -- --------------------------------------------------------
 
@@ -174,6 +253,40 @@ CREATE TABLE `password_resets` (
   `token` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `password_resets`
+--
+
+INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
+('manirujjamanakash@gmail.com', '$2y$10$vG8iJqPT9kyNoTR6J2KcVuQdOThJPgcqnRWiFM53CBn8.fPg.B1U6', '2018-08-30 21:08:33');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payments`
+--
+
+CREATE TABLE `payments` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `priority` tinyint(4) NOT NULL DEFAULT '1',
+  `short_name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `no` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'Payment No',
+  `type` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL COMMENT 'agent|personal',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `payments`
+--
+
+INSERT INTO `payments` (`id`, `name`, `image`, `priority`, `short_name`, `no`, `type`, `created_at`, `updated_at`) VALUES
+(1, 'Cash In', 'cash_in.jpg', 1, 'cash_in', NULL, NULL, '2018-08-28 08:57:00', '2018-08-28 08:57:00'),
+(2, 'Bkash', 'bkash.jpg', 2, 'bkash', '01951233084', 'personal', '2018-08-28 08:57:00', '2018-08-28 08:57:00'),
+(3, 'Rocket', 'rocket.jpg', 3, 'rocket', '019512330845', 'personal', '2018-08-28 08:57:00', '2018-08-28 08:57:00');
 
 -- --------------------------------------------------------
 
@@ -203,8 +316,8 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`id`, `category_id`, `brand_id`, `title`, `description`, `slug`, `quantity`, `price`, `status`, `offer_price`, `admin_id`, `created_at`, `updated_at`) VALUES
 (1, 3, 2, 'Iphone 8', 'Iphone', 'Iphone-8', 1, 10000, 1, NULL, 1, '2018-02-21 18:00:00', '2018-02-21 18:00:00'),
-(2, 2, 2, 'Samsung Galaxy 2', 'Samsung GalaxySamsung GalaxySamsung Galaxy\r\n\r\nSamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung Galaxy\r\n\r\nSamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung Galaxy', 'Samsung-Galaxy-2', 0, 10000, 1, NULL, 1, '2018-02-21 18:00:00', '2018-02-21 18:00:00'),
-(3, 2, 2, 'Sony Camera', 'Sony Camera', 'sony-camera', 20, 20000, 0, NULL, 1, '2018-07-20 23:24:30', '2018-07-21 00:28:47');
+(2, 2, 2, 'Samsung Galaxy 2', 'Samsung GalaxySamsung GalaxySamsung Galaxy\r\n\r\nSamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung Galaxy\r\n\r\nSamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung GalaxySamsung Galaxy', 'Samsung-Galaxy-2', 0, 300, 1, NULL, 1, '2018-02-21 18:00:00', '2018-08-28 01:12:03'),
+(3, 2, 2, 'Sony Camera', 'Sony Camera', 'sony-camera', 20, 100, 0, NULL, 1, '2018-07-20 23:24:30', '2018-08-28 01:11:53');
 
 -- --------------------------------------------------------
 
@@ -232,6 +345,29 @@ INSERT INTO `product_images` (`id`, `product_id`, `image`, `created_at`, `update
 (5, 2, '1519483895.png', '2018-02-24 08:51:35', '2018-02-24 08:51:35'),
 (6, 6, '1519483895.png', '2018-02-24 08:51:35', '2018-02-24 08:51:35'),
 (7, 3, '1532150670.png', '2018-07-20 23:24:30', '2018-07-20 23:24:30');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `settings`
+--
+
+CREATE TABLE `settings` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `email` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `phone` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `address` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `shipping_cost` int(10) UNSIGNED NOT NULL DEFAULT '100',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `settings`
+--
+
+INSERT INTO `settings` (`id`, `email`, `phone`, `address`, `shipping_cost`, `created_at`, `updated_at`) VALUES
+(1, 'test@example.com', '01951233084', 'Dhaka-1200, Dhaka', 100, '2018-08-28 08:40:14', '2018-08-28 08:40:14');
 
 -- --------------------------------------------------------
 
@@ -264,7 +400,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `phone_no`, `email`, `password`, `street_address`, `division_id`, `district_id`, `status`, `ip_address`, `avatar`, `shipping_address`, `remember_token`, `created_at`, `updated_at`) VALUES
-(8, 'Maniruzzaman', 'Akash', 'maniruzzamanakash2', '1951233084', 'manirujjamanakash@gmail.com', '$2y$10$hFKyIY6GoQ.anijWOknn7eKyXKn9xQC7jvWthDPs3./hXG3tXQ8Gi', 'Patuakhali, Bangladesh', 4, 2, 1, '::1', NULL, 'New', '4bqFsIBP7Y6e4Jlfb9yMwE8UUhZBpdTO0abQbCj4q5M0hvBshpuS1NmyC2CM', '2018-07-22 00:35:46', '2018-08-27 19:45:20');
+(8, 'Maniruzzaman', 'Akash', 'maniruzzamanakash2', '1951233084', 'manirujjamanakash@gmail.com', '$2y$10$hFKyIY6GoQ.anijWOknn7eKyXKn9xQC7jvWthDPs3./hXG3tXQ8Gi', 'Patuakhali, Bangladesh', 4, 2, 1, '::1', NULL, 'New', 'ESylWs9P7E6n1BglawSa4jIImKdNWbtChOMm2yBvcLjTR73jfy2aQIwrvSCk', '2018-07-22 00:35:46', '2018-08-27 19:45:20');
 
 --
 -- Indexes for dumped tables
@@ -274,13 +410,23 @@ INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `phone_no`, `e
 -- Indexes for table `admins`
 --
 ALTER TABLE `admins`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `admins_email_unique` (`email`);
 
 --
 -- Indexes for table `brands`
 --
 ALTER TABLE `brands`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `carts`
+--
+ALTER TABLE `carts`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `carts_user_id_foreign` (`user_id`),
+  ADD KEY `carts_product_id_foreign` (`product_id`),
+  ADD KEY `carts_order_id_foreign` (`order_id`);
 
 --
 -- Indexes for table `categories`
@@ -307,10 +453,25 @@ ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `orders_user_id_foreign` (`user_id`),
+  ADD KEY `orders_payment_id_foreign` (`payment_id`);
+
+--
 -- Indexes for table `password_resets`
 --
 ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
+
+--
+-- Indexes for table `payments`
+--
+ALTER TABLE `payments`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `payments_short_name_unique` (`short_name`);
 
 --
 -- Indexes for table `products`
@@ -322,6 +483,12 @@ ALTER TABLE `products`
 -- Indexes for table `product_images`
 --
 ALTER TABLE `product_images`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `settings`
+--
+ALTER TABLE `settings`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -341,12 +508,17 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `brands`
 --
 ALTER TABLE `brands`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `carts`
+--
+ALTER TABLE `carts`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `categories`
 --
@@ -366,7 +538,17 @@ ALTER TABLE `divisions`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT for table `payments`
+--
+ALTER TABLE `payments`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `products`
 --
@@ -378,10 +560,34 @@ ALTER TABLE `products`
 ALTER TABLE `product_images`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
+-- AUTO_INCREMENT for table `settings`
+--
+ALTER TABLE `settings`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;COMMIT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `carts`
+--
+ALTER TABLE `carts`
+  ADD CONSTRAINT `carts_order_id_foreign` FOREIGN KEY (`order_id`) REFERENCES `orders` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `carts_product_id_foreign` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `carts_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `orders`
+--
+ALTER TABLE `orders`
+  ADD CONSTRAINT `orders_payment_id_foreign` FOREIGN KEY (`payment_id`) REFERENCES `payments` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `orders_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

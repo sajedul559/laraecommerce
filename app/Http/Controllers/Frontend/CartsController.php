@@ -4,19 +4,32 @@ namespace App\Http\Controllers\Frontend;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Auth;
+
+use App\Models\Order;
 use App\Models\Cart;
+
+use Auth;
+
 class CartsController extends Controller
 {
-	 public function index()
+  /**
+  * Display a listing of the resource.
+  *
+  * @return \Illuminate\Http\Response
+  */
+  public function index()
   {
     return view('frontend.pages.carts');
   }
 
 
-
-
-    public function store(Request $request)
+  /**
+  * Store a newly created resource in storage.
+  *
+  * @param  \Illuminate\Http\Request  $request
+  * @return \Illuminate\Http\Response
+  */
+  public function store(Request $request)
   {
 
 
@@ -55,7 +68,14 @@ class CartsController extends Controller
     return back();
   }
 
-   public function update(Request $request, $id)
+  /**
+  * Update the specified resource in storage.
+  *
+  * @param  \Illuminate\Http\Request  $request
+  * @param  int  $id
+  * @return \Illuminate\Http\Response
+  */
+  public function update(Request $request, $id)
   {
     $cart = Cart::find($id);
     if (!is_null($cart)) {
@@ -68,7 +88,13 @@ class CartsController extends Controller
     return back();
   }
 
-   public function destroy($id)
+  /**
+  * Remove the specified resource from storage.
+  *
+  * @param  int  $id
+  * @return \Illuminate\Http\Response
+  */
+  public function destroy($id)
   {
     $cart = Cart::find($id);
     if (!is_null($cart)) {

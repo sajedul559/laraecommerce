@@ -31,11 +31,15 @@ Route::group(['prefix' => 'products'], function(){
   Route::get('/category/{id}', 'Frontend\CategoriesController@show')->name('categories.show');
 });
 
-// Checkout Routes
-Route::group(['prefix' => 'checkout'], function(){
-Route::get('/', 'Frontend\CheckoutsController@index')->name('checkouts');
-Route::post('/store', 'Frontend\CheckoutsController@store')->name('checkouts.store');
+
+// User Routes
+Route::group(['prefix' => 'user'], function(){
+Route::get('/token/{token}', 'Frontend\VerificationController@verify')->name('user.verification');
+Route::get('/dashboard', 'Frontend\UsersController@dashboard')->name('user.dashboard');
+Route::get('/profile', 'Frontend\UsersController@profile')->name('user.profile');
+Route::post('/profile/update', 'Frontend\UsersController@profileUpdate')->name('user.profile.update');
 });
+
 
 // Cart Routes
 Route::group(['prefix' => 'carts'], function(){
@@ -45,26 +49,32 @@ Route::post('/update/{id}', 'Frontend\CartsController@update')->name('carts.upda
 Route::post('/delete/{id}', 'Frontend\CartsController@destroy')->name('carts.delete');
 });
 
-// User Routes
-Route::group(['prefix' => 'user'], function(){
-Route::get('/token/{token}', 'Frontend\VerificationController@verify')->name('user.verification');
-Route::get('/dashboard', 'Frontend\UsersController@dashboard')->name('user.dashboard');
-Route::get('/profile', 'Frontend\UsersController@profile')->name('user.profile');
-Route::post('/profile/update', 'Frontend\UsersController@profileUpdate')->name('user.profile.update');
+// Checkout Routes
+Route::group(['prefix' => 'checkout'], function(){
+Route::get('/', 'Frontend\CheckoutsController@index')->name('checkouts');
+Route::post('/store', 'Frontend\CheckoutsController@store')->name('checkouts.store');
 });
 
-// User Routes
-Route::group(['prefix' => 'user'], function(){
-Route::get('/token/{token}', 'Frontend\VerificationController@verify')->name('user.verification');
-Route::get('/dashboard', 'Frontend\UsersController@dashboard')->name('user.dashboard');
-Route::get('/profile', 'Frontend\UsersController@profile')->name('user.profile');
-Route::post('/profile/update', 'Frontend\UsersController@profileUpdate')->name('user.profile.update');
-});
+
+
 
 
 // Admin Routes
 Route::group(['prefix' => 'admin'], function(){
   Route::get('/', 'Backend\PagesController@index')->name('admin.index');
+
+  // Admin Login Routes
+  Route::get('/login', 'Auth\Admin\LoginController@showLoginForm')->name('admin.login');
+  Route::post('/login/submit', 'Auth\Admin\LoginController@login')->name('admin.login.submit');
+  Route::post('/logout/submit', 'Auth\Admin\LoginController@logout')->name('admin.logout');
+
+  // Password Email Send
+  Route::get('/password/reset', 'Auth\Admin\ForgotPasswordController@showLinkRequestForm')->name('admin.password.request');
+  Route::post('/password/resetPost', 'Auth\Admin\ForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
+
+  // Password Reset
+  Route::get('/password/reset/{token}', 'Auth\Admin\ResetPasswordController@showResetForm')->name('admin.password.reset');
+  Route::post('/password/reset', 'Auth\Admin\ResetPasswordController@reset')->name('admin.password.reset.post');
 
 
   // Product Routes
@@ -78,6 +88,20 @@ Route::group(['prefix' => 'admin'], function(){
     Route::post('/product/edit/{id}', 'Backend\ProductsController@update')->name('admin.product.update');
     Route::post('/product/delete/{id}', 'Backend\ProductsController@delete')->name('admin.product.delete');
   });
+
+
+    // Orders Routes
+  Route::group(['prefix' => '/orders'], function(){
+    Route::get('/', 'Backend\OrdersController@index')->name('admin.orders');
+    Route::get('/view/{id}', 'Backend\OrdersController@show')->name('admin.order.show');
+    Route::post('/delete/{id}', 'Backend\OrdersController@delete')->name('admin.order.delete');
+
+    Route::post('/completed/{id}', 'Backend\OrdersController@completed')->name('admin.order.completed');
+
+    Route::post('/paid/{id}', 'Backend\OrdersController@paid')->name('admin.order.paid');
+
+  });
+
 
 
   // Category Routes
@@ -103,8 +127,6 @@ Route::group(['prefix' => 'admin'], function(){
     Route::post('/brand/edit/{id}', 'Backend\BrandsController@update')->name('admin.brand.update');
     Route::post('/brand/delete/{id}', 'Backend\BrandsController@delete')->name('admin.brand.delete');
   });
-
-
 
   // Division Routes
   Route::group(['prefix' => '/divisions'], function(){

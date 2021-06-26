@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 namespace App\Http\Controllers\Backend;
 
@@ -11,6 +11,11 @@ use File;
 
 class CategoriesController extends Controller
 {
+  public function __construct()
+  {
+    $this->middleware('auth:admin');
+  }
+  
   public function index()
   {
     $categories = Category::orderBy('id', 'desc')->get();

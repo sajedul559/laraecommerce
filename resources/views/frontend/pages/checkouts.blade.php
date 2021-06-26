@@ -109,7 +109,7 @@
           </div>
         </div>
 
-         <div class="form-group row">
+        <div class="form-group row">
           <label for="payment_method" class="col-md-4 col-form-label text-md-right">Select a payment method</label>
 
           <div class="col-md-6">
@@ -169,7 +169,7 @@
 </div>
 @endsection
 
- @section('scripts')
+@section('scripts')
   <script type="text/javascript">
   $("#payments").change(function(){
     $payment_method = $("#payments").val();

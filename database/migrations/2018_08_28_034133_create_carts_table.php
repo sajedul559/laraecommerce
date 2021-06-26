@@ -13,7 +13,7 @@ class CreateCartsTable extends Migration
      */
     public function up()
     {
-         Schema::create('carts', function (Blueprint $table) {
+        Schema::create('carts', function (Blueprint $table) {
           $table->increments('id');
 
           $table->unsignedInteger('product_id');
