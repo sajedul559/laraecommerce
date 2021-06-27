@@ -159,3 +159,11 @@ Route::group(['prefix' => 'admin'], function(){
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+// Api Routes
+
+Route::get('get-districts/{id}',function($id){
+  $result = App\Models\District::where('division_id', $id)->get();
+  //dd($result);
+return json_encode($result);
+});
